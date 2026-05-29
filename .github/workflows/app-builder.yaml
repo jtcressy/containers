@@ -98,10 +98,11 @@ jobs:
       - name: Build
         uses: docker/bake-action@v6
         with:
-          source: ./apps/${{ inputs.app }}
           files: |
-            ./docker-bake.hcl
+            ./apps/${{ inputs.app }}/docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file }}
+          set: |
+            *.context=./apps/${{ inputs.app }}
           targets: ${{ inputs.release && 'image-all' || 'image-local' }}
           push: ${{ inputs.release }}
           load: ${{ ! inputs.release }}
