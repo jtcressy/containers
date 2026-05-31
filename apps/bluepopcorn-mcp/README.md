@@ -30,6 +30,10 @@ Optional environment variables:
 | `HTTP_PORT` | `8080` |
 | `HTTP_TIMEOUT` | `15` |
 | `MIN_RATING_VOTES` | `50` |
+| `SEERR_API_USER` | unset |
+| `JELLYSEERR_API_USER` | unset; fallback alias for `SEERR_API_USER` |
+
+When `SEERR_API_USER` is set, the image sends it to Seerr as `X-API-User`.
 
 Endpoints:
 

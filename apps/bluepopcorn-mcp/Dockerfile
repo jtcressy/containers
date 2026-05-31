@@ -18,6 +18,10 @@ RUN python -m venv "${VIRTUAL_ENV}" \
     && pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir "bluepopcorn @ git+https://github.com/Averyy/bluepopcorn.git@${BLUEPOPCORN_REF}"
 
+COPY patches/bluepopcorn-x-api-user.py /tmp/bluepopcorn-x-api-user.py
+RUN python /tmp/bluepopcorn-x-api-user.py \
+    && rm /tmp/bluepopcorn-x-api-user.py
+
 FROM docker.io/library/python:3.12-slim
 
 ENV HTTP_HOST=0.0.0.0 \
