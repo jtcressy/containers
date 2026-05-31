@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM docker.io/library/python:3.12-slim AS builder
+FROM docker.io/library/python:3.14-slim AS builder
 
 ARG BLUEPOPCORN_REF
 
@@ -22,7 +22,7 @@ COPY patches/bluepopcorn-x-api-user.py /tmp/bluepopcorn-x-api-user.py
 RUN python /tmp/bluepopcorn-x-api-user.py \
     && rm /tmp/bluepopcorn-x-api-user.py
 
-FROM docker.io/library/python:3.12-slim
+FROM docker.io/library/python:3.14-slim
 
 ENV HTTP_HOST=0.0.0.0 \
     HTTP_PORT=8080 \
