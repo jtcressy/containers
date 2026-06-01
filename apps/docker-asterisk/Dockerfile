@@ -30,7 +30,8 @@ RUN printf '%s\n' \
         res_http_websocket \
         res_pjsip \
         res_websocket_client; do \
-            find /usr/lib -path "*/asterisk/modules/${module}.so" -print -quit | grep -q .; \
+            find /usr/lib -path "*/asterisk/modules/${module}.so" -print -quit | grep -q . \
+                || { echo "Missing Asterisk module: ${module}" >&2; exit 1; }; \
         done \
     && getent passwd asterisk >/dev/null
 
