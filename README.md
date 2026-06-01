@@ -14,6 +14,7 @@ ghcr.io/jtcressy/<app>
 | App | Image | Upstream |
 | --- | --- | --- |
 | `bluepopcorn-mcp` | `ghcr.io/jtcressy/bluepopcorn-mcp` | `Averyy/bluepopcorn` |
+| `docker-asterisk` | `ghcr.io/jtcressy/docker-asterisk` | Asterisk packaged from a pinned Debian sid snapshot |
 
 ## Repository Pattern
 
@@ -24,6 +25,7 @@ apps/<app>/
   Dockerfile
   docker-bake.hcl
   README.md
+  smoke.sh       # optional app-specific smoke check; receives the image ref
 ```
 
 The `docker-bake.hcl` file is the image contract. It defines:
@@ -45,6 +47,7 @@ branch HEAD commit.
 task apps:list
 task apps:build APP=bluepopcorn-mcp
 task apps:smoke APP=bluepopcorn-mcp
+task apps:smoke APP=docker-asterisk
 ```
 
 ## Releases
