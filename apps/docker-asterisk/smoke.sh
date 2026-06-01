@@ -5,6 +5,19 @@ image="${1:?image is required}"
 
 docker run --rm --entrypoint asterisk "${image}" -V | grep -F "Asterisk 22.9.0"
 
+if docker run --rm -e ASTERISK_REQUIRE_UNIFI=false "${image}" true; then
+    echo "Expected missing ASTERISK_ARI_PASSWORD to fail" >&2
+    exit 1
+fi
+
+if docker run --rm \
+    -e ASTERISK_REQUIRE_UNIFI=false \
+    -e ASTERISK_ARI_PASSWORD=dograh-change-me \
+    "${image}" true; then
+    echo "Expected default ASTERISK_ARI_PASSWORD to fail" >&2
+    exit 1
+fi
+
 docker run --rm \
     -e ASTERISK_REQUIRE_UNIFI=false \
     -e ASTERISK_ARI_USERNAME=smoke-ari \
@@ -32,7 +45,7 @@ docker run --rm \
         grep -F "[smoke-talk-registration]" /etc/asterisk/pjsip.conf
     '
 
-cid="$(docker run -d -e ASTERISK_REQUIRE_UNIFI=false "${image}")"
+cid="$(docker run -d -e ASTERISK_REQUIRE_UNIFI=false -e ASTERISK_ARI_PASSWORD=smoke-password "${image}")"
 trap 'docker rm -f "${cid}" >/dev/null 2>&1 || true' EXIT
 
 for _ in $(seq 1 30); do

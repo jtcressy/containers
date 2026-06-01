@@ -20,6 +20,10 @@ ghcr.io/jtcressy/docker-asterisk
 The release build targets `linux/amd64`, which is the required home cluster
 architecture.
 
+`ASTERISK_ARI_PASSWORD` is required at runtime and must be generated per
+deployment. The entrypoint rejects the historical `dograh-change-me` placeholder
+to avoid exposing ARI with a public default credential.
+
 ## Notes
 
 This intentionally avoids compiling Asterisk from source. The package source is

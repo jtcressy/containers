@@ -4,7 +4,7 @@ set -euo pipefail
 ASTERISK_REQUIRE_UNIFI="${ASTERISK_REQUIRE_UNIFI:-true}"
 
 ASTERISK_ARI_USERNAME="${ASTERISK_ARI_USERNAME:-dograh}"
-ASTERISK_ARI_PASSWORD="${ASTERISK_ARI_PASSWORD:-dograh-change-me}"
+ASTERISK_ARI_PASSWORD="${ASTERISK_ARI_PASSWORD:-}"
 ASTERISK_STASIS_APP="${ASTERISK_STASIS_APP:-dograh}"
 ASTERISK_HTTP_BINDADDR="${ASTERISK_HTTP_BINDADDR:-0.0.0.0}"
 ASTERISK_HTTP_PORT="${ASTERISK_HTTP_PORT:-8088}"
@@ -66,16 +66,23 @@ export UNIFI_TALK_SIP_USERNAME
 export UNIFI_TALK_SIP_PASSWORD
 export DOGRAH_INBOUND_EXTENSION
 
+missing=()
+[[ -n "${ASTERISK_ARI_PASSWORD}" ]] || missing+=("ASTERISK_ARI_PASSWORD")
+
 if [[ "${ASTERISK_REQUIRE_UNIFI}" == "true" ]]; then
-    missing=()
     [[ -n "${UNIFI_TALK_SIP_SERVER}" ]] || missing+=("UNIFI_TALK_SIP_SERVER")
     [[ -n "${UNIFI_TALK_SIP_USERNAME}" ]] || missing+=("UNIFI_TALK_SIP_USERNAME")
     [[ -n "${UNIFI_TALK_SIP_PASSWORD}" ]] || missing+=("UNIFI_TALK_SIP_PASSWORD")
+fi
 
-    if (( ${#missing[@]} > 0 )); then
-        printf 'Missing required Asterisk environment variables: %s\n' "${missing[*]}" >&2
-        exit 64
-    fi
+if (( ${#missing[@]} > 0 )); then
+    printf 'Missing required Asterisk environment variables: %s\n' "${missing[*]}" >&2
+    exit 64
+fi
+
+if [[ "${ASTERISK_ARI_PASSWORD}" == "dograh-change-me" ]]; then
+    printf 'ASTERISK_ARI_PASSWORD must not use the public default value.\n' >&2
+    exit 64
 fi
 
 mkdir -p /etc/asterisk /var/lib/asterisk /var/log/asterisk /var/run/asterisk /var/spool/asterisk
