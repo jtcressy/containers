@@ -6,6 +6,9 @@ user_agent = Dograh Asterisk Sidecar
 type = transport
 protocol = udp
 bind = ${ASTERISK_PJSIP_BINDADDR}:${ASTERISK_PJSIP_PORT}
+${ASTERISK_PJSIP_EXTERNAL_SIGNALING_LINE}
+${ASTERISK_PJSIP_EXTERNAL_MEDIA_LINE}
+${ASTERISK_PJSIP_LOCAL_NET_LINE}
 
 [${UNIFI_TALK_ENDPOINT}-auth]
 type = auth

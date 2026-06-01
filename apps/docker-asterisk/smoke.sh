@@ -11,6 +11,8 @@ docker run --rm \
     -e ASTERISK_ARI_PASSWORD=smoke-password \
     -e ASTERISK_HTTP_BINDADDR=127.0.0.1 \
     -e ASTERISK_HTTP_PORT=19088 \
+    -e ASTERISK_EXTERNAL_ADDRESS=198.51.100.25 \
+    -e ASTERISK_LOCAL_NET=192.168.20.0/24 \
     -e DOGRAH_INBOUND_EXTENSION=7900 \
     -e UNIFI_TALK_ENDPOINT=smoke-talk \
     -e UNIFI_TALK_SIP_SERVER=192.0.2.10 \
@@ -23,6 +25,9 @@ docker run --rm \
         grep -F "bindaddr = 127.0.0.1" /etc/asterisk/http.conf
         grep -F "bindport = 19088" /etc/asterisk/http.conf
         grep -F "exten => 7900,1" /etc/asterisk/extensions.conf
+        grep -F "external_signaling_address = 198.51.100.25" /etc/asterisk/pjsip.conf
+        grep -F "external_media_address = 198.51.100.25" /etc/asterisk/pjsip.conf
+        grep -F "local_net = 192.168.20.0/24" /etc/asterisk/pjsip.conf
         grep -F "contact = sip:192.0.2.10:5060" /etc/asterisk/pjsip.conf
         grep -F "[smoke-talk-registration]" /etc/asterisk/pjsip.conf
     '
