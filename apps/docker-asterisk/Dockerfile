@@ -35,6 +35,7 @@ RUN printf '%s\n' \
     && getent passwd asterisk >/dev/null
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY templates/ /etc/asterisk/templates/
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
     && mkdir -p /etc/asterisk/templates /var/lib/asterisk /var/log/asterisk /var/run/asterisk /var/spool/asterisk \

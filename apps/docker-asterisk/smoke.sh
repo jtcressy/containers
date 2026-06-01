@@ -5,6 +5,28 @@ image="${1:?image is required}"
 
 docker run --rm --entrypoint asterisk "${image}" -V | grep -F "Asterisk 22.9.0"
 
+docker run --rm \
+    -e ASTERISK_REQUIRE_UNIFI=false \
+    -e ASTERISK_ARI_USERNAME=smoke-ari \
+    -e ASTERISK_ARI_PASSWORD=smoke-password \
+    -e ASTERISK_HTTP_BINDADDR=127.0.0.1 \
+    -e ASTERISK_HTTP_PORT=19088 \
+    -e DOGRAH_INBOUND_EXTENSION=7900 \
+    -e UNIFI_TALK_ENDPOINT=smoke-talk \
+    -e UNIFI_TALK_SIP_SERVER=192.0.2.10 \
+    -e UNIFI_TALK_SIP_USERNAME=smoke-user \
+    -e UNIFI_TALK_SIP_PASSWORD=smoke-sip-password \
+    "${image}" bash -c '
+        set -euo pipefail
+        grep -F "[smoke-ari]" /etc/asterisk/ari.conf
+        grep -F "password = smoke-password" /etc/asterisk/ari.conf
+        grep -F "bindaddr = 127.0.0.1" /etc/asterisk/http.conf
+        grep -F "bindport = 19088" /etc/asterisk/http.conf
+        grep -F "exten => 7900,1" /etc/asterisk/extensions.conf
+        grep -F "contact = sip:192.0.2.10:5060" /etc/asterisk/pjsip.conf
+        grep -F "[smoke-talk-registration]" /etc/asterisk/pjsip.conf
+    '
+
 cid="$(docker run -d -e ASTERISK_REQUIRE_UNIFI=false "${image}")"
 trap 'docker rm -f "${cid}" >/dev/null 2>&1 || true' EXIT
 
