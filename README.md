@@ -14,6 +14,7 @@ ghcr.io/jtcressy/<app>
 | App | Image | Upstream |
 | --- | --- | --- |
 | `bluepopcorn-mcp` | `ghcr.io/jtcressy/bluepopcorn-mcp` | `Averyy/bluepopcorn` |
+| `camofox-browser` | `ghcr.io/jtcressy/camofox-browser` | `jo-inc/camofox-browser` |
 | `docker-asterisk` | `ghcr.io/jtcressy/docker-asterisk` | Asterisk packaged from a pinned Debian sid snapshot |
 
 ## Repository Pattern
