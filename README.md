@@ -16,6 +16,7 @@ ghcr.io/jtcressy/<app>
 | `bluepopcorn-mcp` | `ghcr.io/jtcressy/bluepopcorn-mcp` | `Averyy/bluepopcorn` |
 | `camofox-browser` | `ghcr.io/jtcressy/camofox-browser` | `jo-inc/camofox-browser` |
 | `docker-asterisk` | `ghcr.io/jtcressy/docker-asterisk` | Asterisk packaged from a pinned Debian sid snapshot |
+| `hermes-mem0-deps` | `ghcr.io/jtcressy/hermes-mem0-deps` | `mem0ai/mem0` Python deps for the Hermes agent |
 
 ## Repository Pattern
 
