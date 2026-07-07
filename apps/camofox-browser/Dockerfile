@@ -18,7 +18,7 @@ RUN git clone --depth 1 --branch "${CAMOFOX_REF}" \
 
 # Upstream Dockerfile.ci uses node:20-slim, but package.json requires
 # node >= 22 and the upstream primary Dockerfile uses node:22-slim.
-FROM docker.io/library/node:22-slim
+FROM docker.io/library/node:24-slim
 
 ARG TARGETARCH
 
