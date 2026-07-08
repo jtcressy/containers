@@ -10,7 +10,7 @@ variable "VERSION" {
 
 variable "UPSTREAM_REF" {
   // renovate: datasource=git-refs packageName=https://github.com/Averyy/bluepopcorn depName=Averyy/bluepopcorn currentValue=main
-  default = "73b442abb6920c31170758cd1cef4f9463724916"
+  default = "71ef29fbe1f0f319a4e1ff2041360bc78d442214"
 }
 
 variable "SOURCE" {
