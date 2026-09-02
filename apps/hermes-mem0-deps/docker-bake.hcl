@@ -6,12 +6,12 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=pypi depName=mem0ai
-  default = "2.0.7"
+  default = "2.0.20"
 }
 
 variable "UPSTREAM_REF" {
   // renovate: datasource=pypi depName=mem0ai
-  default = "2.0.7"
+  default = "2.0.20"
 }
 
 variable "SOURCE" {
