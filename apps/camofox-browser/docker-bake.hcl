@@ -6,12 +6,12 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=jo-inc/camofox-browser
-  default = "1.11.2"
+  default = "1.17.0"
 }
 
 variable "UPSTREAM_REF" {
   // renovate: datasource=github-releases depName=jo-inc/camofox-browser
-  default = "v1.11.2"
+  default = "v1.17.0"
 }
 
 variable "SOURCE" {
