@@ -9,7 +9,7 @@
 # Python-version coupling: if upstream Hermes moves off Python 3.13, bump the
 # builder base tag below to the matching Hermes release and rebuild — the
 # compiled wheels are interpreter-version specific.
-FROM nousresearch/hermes-agent:v2026.7.1@sha256:b6c019227889e6675424a2b6223b2cafdd36bf7d1048d1ddd8e043b880d6cc0f AS builder
+FROM nousresearch/hermes-agent:v2026.9.24@sha256:fca358f12efd65bfaaca05884166f15c0e2788375ca30d77061ac1ebc96452b7 AS builder
 
 ARG MEM0_VERSION
 
